@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IvoireArt - Accueil</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        
+        header {
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #FFD700;
+        }
+
+        
+        .hero {
+            background: linear-gradient(rgba(139,69,19,0.85), rgba(210,105,30,0.85)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f8f4e6" width="1200" height="800"/><path fill="%238B4513" opacity="0.4" d="M0 400Q300 150 600 400T1200 400Q1200 500 1200 400L1200 800L0 800Z"/><circle fill="%23D2691E" opacity="0.5" cx="400" cy="250" r="100"/><circle fill="%23CD853F" opacity="0.4" cx="800" cy="200" r="80"/><path fill="%23A0522D" d="M200 500Q300 450 400 500Q500 450 600 500Q700 450 800 500Q900 450 1000 500V800H0Z" opacity="0.3"/></svg>');
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 3px 3px 6px rgba(0,0,0,0.7), 0 0 20px #FFD700; }
+            to { text-shadow: 3px 3px 6px rgba(0,0,0,0.7), 0 0 30px #FFD700, 0 0 40px #FFD700; }
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .cta-primary {
+            background: #FFD700;
+            color: #8B4513;
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .cta-secondary:hover {
+            background: white;
+            color: #8B4513;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Preview produits */
+        .products-preview {
+            padding: 6rem 0;
+            background: #f8f4e6;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: #8B4513;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #FFD700;
+            margin: 1rem auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            height: 280px;
+            background: linear-gradient(45deg, #D2691E, #CD853F, #A0522D);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+        }
+
+        .product-card:hover .product-image::before {
+            animation: shine 1.5s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .product-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-size: 1.4rem;
+            color: #8B4513;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #D2691E;
+            margin-bottom: 1rem;
+        }
+
+        /* Stats */
+        .stats {
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            display: block;
+            color: #FFD700;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c1810;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">🇨🇮 IvoireArt</a>
+            <ul class="nav-links">
+                <li><a href="#produits">Produits</a></li>
+                <li><a href="#artisans">Artisans</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>L'Art Ivoirien à Votre Porte</h1>
+            <p>Plateforme e-commerce dédiée aux pagnes wax, bijoux traditionnels et sculptures authentiques. Boostons la visibilité de nos artisans ivoiriens talentueux !</p>
+            <div class="cta-buttons">
+                <a href="#produits" class="cta-button cta-primary">Découvrir la Boutique</a>
+                <a href="#contact" class="cta-button cta-secondary">Devenir Artisan</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aperçu Produits -->
+    <section id="produits" class="products-preview">
+        <div class="container">
+            <h2>Découvrez Nos Trésors</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">🧵</div>
+                    <div class="product-info">
+                        <h3>Pagne Wax Premium</h3>
+                        <div class="product-price">45 000 FCFA</div>
+                        <p>Motifs traditionnels par nos maîtres tisserands</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">💍</div>
+                    <div class="product-info">
+                        <h3>Bijoux Bété</h3>
+                        <div class="product-price">28 000 FCFA</div>
+                        <p>Or et perles traditionnelles authentiques</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🗿</div>
+                    <div class="product-info">
+                        <h3>Sculpture Dan</h3>
+                        <div class="product-price">95 000 FCFA</div>
+                        <p>Œuvre unique en bois précieux</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="container">
+            <h2>Notre Mission</h2>
+            <div class="stats-grid">
+                <div class="stat">
+                    <span class="stat-number">+500</span>
+                    <p>Artisans partenaires</p>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">25+</span>
+                    <p>Pays livrés</p>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">98%</span>
+                    <p>Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h2>Rejoignez la Révolution Ivoirienne</h2>
+            <p>🇨🇮 IvoireArt - Fierté ivoirienne, visibilité mondiale</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
